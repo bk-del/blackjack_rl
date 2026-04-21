@@ -8,6 +8,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 add_library(blackjack_lib
     src/hand.cpp
+    src/blackjack_env.cpp
 )
 
 target_include_directories(blackjack_lib PUBLIC
@@ -26,6 +27,7 @@ find_package(GTest CONFIG REQUIRED)
 
 add_executable(blackjack_tests
     tests/test_hand.cpp
+    tests/test_blackjack_env.cpp
 )
 
 target_link_libraries(blackjack_tests PRIVATE
