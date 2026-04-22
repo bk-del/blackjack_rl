@@ -17,16 +17,20 @@ void QAgent::ensure_state_exists(const State& state) {
 // Choose action with epsilon-greedy policy
 // W/ prob epsilon choose rand action O.W. chose action with larger Q-Value
 
-int QAgent::choose_action(const State& state) {
+int QAgent::choose_action(const State& state, bool explore) {
     ensure_state_exists(state);
+    // Explore = true when training
+    // Explore = false during evaluation
+    if (explore) { 
 
-    std::uniform_real_distribution<double> prob_dist(0.0, 1.0);
-    const double draw = prob_dist(rng_);
+        std::uniform_real_distribution<double> prob_dist(0.0, 1.0);
+        const double draw = prob_dist(rng_);
 
-    if (draw < epsilon_) {
-        std::uniform_int_distribution<int> action_dist(0,1);
-        return action_dist(rng_);
+        if (draw < epsilon_) {
+            std::uniform_int_distribution<int> action_dist(0,1);
+            return action_dist(rng_);
 
+        }
     }
 
     return greedy_action(state);

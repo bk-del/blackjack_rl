@@ -22,8 +22,10 @@ public:
     //Create Q-Learning agent with fixed hyperparam and random number generator seed
     QAgent(double alpha, double gamma, double epsilon, unsigned int seed = 123);
 
-    // Chose action with epsilon-greedy policy
-    int choose_action(const State& state);
+    // Chose action 
+    // If explore = true use epsilon greedy
+    // If explore = false use greedy action only
+    int choose_action(const State& state, bool explore);
 
     // Update Q-table using obserbed transition
     void update(const State& state, int action, double reward, const State& next_state, bool done);

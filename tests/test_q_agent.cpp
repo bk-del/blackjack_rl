@@ -60,3 +60,14 @@ TEST(QAgentTest, GreedyActionChoosesHigherQValue) {
 
     EXPECT_EQ(agent.greedy_action(state), 0);
 }
+
+TEST(QAgentTest, ChoseActionWithoutExploretionUsesGreedyPolicy) {
+    QAgent agent(1.0, 1.0, 0.5, 123);
+    const BlackjackEnv::State state{18, 9, false};
+    const BlackjackEnv::State dummy_next{20, 10, false};
+
+    agent.update(state, 0, 1.0, dummy_next, true);
+
+    EXPECT_EQ(agent.choose_action(state, false), 0);
+
+}
